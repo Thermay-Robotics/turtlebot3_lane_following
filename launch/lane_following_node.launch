@@ -1,0 +1,11 @@
+<launch>
+    <node name="lane_following_node" pkg="turtlebot3_lane_following" type="lane_following_node" output="screen">
+        <param name="angle_order" value="0.0"/>
+        <param name="robot_linear_speed" value="1.5"/>
+        <param name="robot_angular_speed" value="0.5"/>
+
+        <param name="propotionnal_constant" value="0.5"/>
+        <param name="integration_constant" value="0.5"/>
+        <param name="derivation_constant" value="0.5"/>
+    </node>
+</launch>

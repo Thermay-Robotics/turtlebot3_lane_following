@@ -24,6 +24,8 @@ private:
     double derivation_constant;
     double angle_order; 
 
+    std::string sub_topic_name;
+
     double cumulated_error;
     double previous_error;
 

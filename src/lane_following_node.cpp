@@ -6,6 +6,7 @@ int main(int argc, char **argv)
 
   RobotPID robot_pid;
 
+  robot_pid.stopRobot();
   ros::spin();
 
   return 0;

@@ -78,8 +78,6 @@ double RobotPID::PID(double measure_angle)
 
     return correction_order;
 }
-<<<<<<< HEAD
-=======
 
 void RobotPID::stopRobot()
 {
@@ -92,4 +90,3 @@ void RobotPID::stopRobot()
 
     command_publisher.publish(robot_command);
 }
->>>>>>> 0488ad043e01725642820a7afa4e04c8f64ce6a1

@@ -11,7 +11,7 @@ RobotPID::RobotPID() : cumulated_error(0), previous_error(0)
     nh.getParam("/lane_following_node/sensor_topic", sub_topic_name);
 
     lane_detection_subscriber = nh.subscribe(sub_topic_name, 1, &RobotPID::laneDetectionCallback, this);
-    color_sensor_detection_subscriber = nh.subscribe(sub_topic_name, 1, &RobotPID::ColorSensorDetectionCallback, this);
+//    color_sensor_detection_subscriber = nh.subscribe(sub_topic_name, 1, &RobotPID::ColorSensorDetectionCallback, this);
 
     command_publisher = nh.advertise<geometry_msgs::Twist>("cmd_vel", 1000);
 
@@ -78,6 +78,8 @@ double RobotPID::PID(double measure_angle)
 
     return correction_order;
 }
+<<<<<<< HEAD
+=======
 
 void RobotPID::stopRobot()
 {
@@ -90,3 +92,4 @@ void RobotPID::stopRobot()
 
     command_publisher.publish(robot_command);
 }
+>>>>>>> 0488ad043e01725642820a7afa4e04c8f64ce6a1

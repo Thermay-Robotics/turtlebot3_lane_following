@@ -9,6 +9,6 @@
         <param name="integration_constant" value="0.5"/>
         <param name="derivation_constant" value="0.5"/>
 
-        <param name="sensor_topic" value="/Error"/>
+        <param name="sensor_topic" value="/lane_detection/angle"/>
     </node>
 </launch>

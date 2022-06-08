@@ -18,12 +18,13 @@ RobotPID::RobotPID() : cumulated_error(0), previous_error(0)
     robot_command.linear.x = robot_linear_speed;
     robot_command.linear.y = 0;
     robot_command.linear.z = 0;
-    robot_command.angular.x = 0; 
-    robot_command.angular.y = 0; 
-    robot_command.angular.z = 0; 
+    robot_command.angular.x = 0;
+    robot_command.angular.y = 0;
+    robot_command.angular.z = 0;
 }
 
-void RobotPID::ColorSensorDetectionCallback(const std_msgs::Float32::ConstPtr &msg){
+void RobotPID::ColorSensorDetectionCallback(const std_msgs::Float32::ConstPtr &msg)
+{
     robot_command.angular.z = P(msg->data);
 
     command_publisher.publish(robot_command);
@@ -31,32 +32,35 @@ void RobotPID::ColorSensorDetectionCallback(const std_msgs::Float32::ConstPtr &m
     std::cout << "angular command : " << robot_command.angular.z << std::endl;
 }
 
-void RobotPID::laneDetectionCallback(const turtlebot3_lane_detection::line_msg &msg){
-    robot_command.angular.z = P(msg.angle);
+void RobotPID::laneDetectionCallback(const turtlebot3_lane_detection::line_msg &msg)
+{
+    robot_command.angular.z = bang_bang(msg.angle);
 
     command_publisher.publish(robot_command);
 
     std::cout << "angular command : " << robot_command.angular.z << std::endl;
 }
 
-double RobotPID::bang_bang(double measure_angle){
+double RobotPID::bang_bang(double measure_angle)
+{
     double error = measure_angle - angle_order;
     double calculated_order;
-    if(measure_angle - angle_order < 0)
+    if (measure_angle - angle_order < 0)
         return -robot_angular_speed;
- 
+
     return robot_angular_speed;
 }
 
-double RobotPID::P(double measure_angle){
+double RobotPID::P(double measure_angle)
+{
     double error = measure_angle - angle_order;
     double calculated_order;
-    
-    return propotionnal_constant * error;
 
+    return propotionnal_constant * error;
 }
 
-double RobotPID::PI(double measure_angle){
+double RobotPID::PI(double measure_angle)
+{
     double error = measure_angle - angle_order;
 
     cumulated_error += error;
@@ -64,12 +68,28 @@ double RobotPID::PI(double measure_angle){
     return P(measure_angle) + integration_constant * cumulated_error;
 }
 
-double RobotPID::PID(double measure_angle){
+double RobotPID::PID(double measure_angle)
+{
     double error = measure_angle - angle_order;
 
-    double correction_order = PI(measure_angle) + derivation_constant*(error - previous_error);
+    double correction_order = PI(measure_angle) + derivation_constant * (error - previous_error);
 
     previous_error = error;
 
     return correction_order;
 }
+<<<<<<< HEAD
+=======
+
+void RobotPID::stopRobot()
+{
+    robot_command.linear.x = 0;
+    robot_command.linear.y = 0;
+    robot_command.linear.z = 0;
+    robot_command.angular.x = 0;
+    robot_command.angular.y = 0;
+    robot_command.angular.z = 0;
+
+    command_publisher.publish(robot_command);
+}
+>>>>>>> 0488ad043e01725642820a7afa4e04c8f64ce6a1

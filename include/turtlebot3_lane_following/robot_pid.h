@@ -17,14 +17,13 @@ private:
     ros::Subscriber color_sensor_detection_subscriber;
     ros::Publisher command_publisher;
 
-
     /**  Parameters from roslaunch **/
     double robot_linear_speed;
     double robot_angular_speed;
     double propotionnal_constant;
     double integration_constant;
     double derivation_constant;
-    double angle_order; 
+    double angle_order;
 
     std::string sub_topic_name;
 
@@ -44,6 +43,8 @@ private:
 public:
     RobotPID();
     ~RobotPID(){};
+
+    void stopRobot();
 };
 
 #endif

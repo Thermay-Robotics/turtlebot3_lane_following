@@ -11,7 +11,7 @@ RobotPID::RobotPID() : cumulated_error(0), previous_error(0)
     nh.getParam("/lane_following_node/sensor_topic", sub_topic_name);
 
     lane_detection_subscriber = nh.subscribe(sub_topic_name, 1, &RobotPID::laneDetectionCallback, this);
-    color_sensor_detection_subscriber = nh.subscribe(sub_topic_name, 1, &RobotPID::ColorSensorDetectionCallback, this);
+//    color_sensor_detection_subscriber = nh.subscribe(sub_topic_name, 1, &RobotPID::ColorSensorDetectionCallback, this);
 
     command_publisher = nh.advertise<geometry_msgs::Twist>("cmd_vel", 1000);
 

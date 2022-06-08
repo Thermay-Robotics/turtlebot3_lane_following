@@ -34,7 +34,7 @@ void RobotPID::ColorSensorDetectionCallback(const std_msgs::Float32::ConstPtr &m
 
 void RobotPID::laneDetectionCallback(const turtlebot3_lane_detection::line_msg &msg)
 {
-    robot_command.angular.z = bang_bang(msg.angle);
+    robot_command.angular.z = bang_bang(msg.angle) * M_PI / 180;
 
     command_publisher.publish(robot_command);
 

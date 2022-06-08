@@ -2,8 +2,8 @@
     <!-- If you want to launch the node multiple time, change the name tag's value -->
     <node name="lane_following_node" pkg="turtlebot3_lane_following" type="lane_following_node" output="screen">
         <param name="angle_order" value="0.0"/>
-        <param name="robot_linear_speed" value="1.5"/>
-        <param name="robot_angular_speed" value="0.5"/>
+        <param name="robot_linear_speed" value="0.05"/>
+        <param name="robot_angular_speed" value="0.3"/>
 
         <param name="propotionnal_constant" value="0.5"/>
         <param name="integration_constant" value="0.5"/>

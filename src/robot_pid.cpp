@@ -11,6 +11,8 @@ RobotPID::RobotPID() : cumulated_error(0), previous_error(0)
     nh.getParam("/lane_following_node/sensor_topic", sub_topic_name);
 
     lane_detection_subscriber = nh.subscribe(sub_topic_name, 1, &RobotPID::laneDetectionCallback, this);
+    color_sensor_detection_subscriber = nh.subscribe(sub_topic_name, 1, &RobotPID::ColorSensorDetectionCallback, this);
+
     command_publisher = nh.advertise<geometry_msgs::Twist>("cmd_vel", 1000);
 
     robot_command.linear.x = robot_linear_speed;
@@ -19,6 +21,14 @@ RobotPID::RobotPID() : cumulated_error(0), previous_error(0)
     robot_command.angular.x = 0; 
     robot_command.angular.y = 0; 
     robot_command.angular.z = 0; 
+}
+
+void RobotPID::ColorSensorDetectionCallback(const std_msgs::Float32::ConstPtr &msg){
+    robot_command.angular.z = P(msg->data);
+
+    command_publisher.publish(robot_command);
+
+    std::cout << "angular command : " << robot_command.angular.z << std::endl;
 }
 
 void RobotPID::laneDetectionCallback(const turtlebot3_lane_detection::line_msg &msg){

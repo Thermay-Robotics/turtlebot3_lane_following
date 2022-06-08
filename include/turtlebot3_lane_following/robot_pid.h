@@ -3,6 +3,7 @@
 
 #include <ros/ros.h>
 #include <geometry_msgs/Twist.h>
+#include <std_msgs/Float32.h>
 
 #include <turtlebot3_lane_detection/line_msg.h>
 
@@ -13,6 +14,7 @@ class RobotPID
 private:
     ros::NodeHandle nh;
     ros::Subscriber lane_detection_subscriber;
+    ros::Subscriber color_sensor_detection_subscriber;
     ros::Publisher command_publisher;
 
 
@@ -32,6 +34,7 @@ private:
     geometry_msgs::Twist robot_command;
 
     void laneDetectionCallback(const turtlebot3_lane_detection::line_msg &msg);
+    void ColorSensorDetectionCallback(const std_msgs::Float32::ConstPtr &msg);
 
     double bang_bang(double measure_angle);
     double P(double measure_angle);
